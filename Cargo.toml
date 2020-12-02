@@ -8,3 +8,11 @@ version = "0.1.0"
 
 [dependencies]
 lazy_static = "1.4.0"
+text_io = "0.1.8"
+
+[dev-dependencies]
+criterion = "0.3"
+
+[[bench]]
+harness = false
+name = "benchmark"
