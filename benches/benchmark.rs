@@ -37,5 +37,16 @@ pub fn day_3(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, day_1, day_2, day_3);
+pub fn day_4(c: &mut Criterion) {
+    let input = day4::parse_input(include_str!("../inputs/day4.txt"));
+
+    c.bench_function("day_4", |b| {
+        b.iter(|| {
+            day4::part_1(black_box(&input));
+            day4::part_2(black_box(&input));
+        })
+    });
+}
+
+criterion_group!(benches, day_1, day_2, day_3, day_4);
 criterion_main!(benches);
