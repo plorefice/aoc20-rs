@@ -49,19 +49,19 @@ pub fn part_2(mut input: Vec<usize>) -> usize {
 mod tests {
     use super::*;
 
-    use lazy_static::lazy_static;
-
-    lazy_static! {
-        static ref INPUT: Vec<usize> = parse_input(include_str!("../inputs/day1.txt"));
-    }
-
     #[test]
     fn part_1_solution() {
-        assert_eq!(part_1(&INPUT), 1020084);
+        assert_eq!(
+            part_1(&parse_input(include_str!("../inputs/day1.txt"))),
+            1020084
+        );
     }
 
     #[test]
     fn part_2_solution() {
-        assert_eq!(part_2(INPUT.clone()), 295086480);
+        assert_eq!(
+            part_2(parse_input(include_str!("../inputs/day1.txt"))),
+            295086480
+        );
     }
 }

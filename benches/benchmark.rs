@@ -14,7 +14,7 @@ pub fn day_1(c: &mut Criterion) {
 pub fn day_2(c: &mut Criterion) {
     c.bench_function("day_2", |b| {
         b.iter(|| {
-            let input = day2::parse_input(include_str!("../inputs/day2.txt"));
+            let input = day2::parse_input(include_bytes!("../inputs/day2.txt"));
             day2::part_1(black_box(&input));
             day2::part_2(black_box(&input));
         })

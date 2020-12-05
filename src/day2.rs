@@ -1,37 +1,44 @@
+use std::str;
+
 #[derive(Default)]
-pub struct Password {
+pub struct Password<'a> {
     a: usize,
     b: usize,
-    letter: char,
-    text: String,
+    letter: u8,
+    text: &'a [u8],
 }
 
-pub fn parse_input<S: AsRef<str>>(input: S) -> Vec<Password> {
+pub fn parse_input<'a>(input: &'a [u8]) -> Vec<Password<'a>> {
     input
-        .as_ref()
-        .lines()
+        .split(|b| *b == b'\n')
         .map(|l| {
-            let mut pwd = Password::default();
-            text_io::scan!(l.bytes() => "{}-{} {}: {}", pwd.a, pwd.b, pwd.letter, pwd.text);
-            pwd
+            let mut words = l.split(u8::is_ascii_whitespace);
+            let mut bounds = words.next().unwrap().split(|b| *b == b'-');
+
+            Password {
+                a: unsafe { str::from_utf8_unchecked(bounds.next().unwrap()) }
+                    .parse()
+                    .unwrap(),
+                b: unsafe { str::from_utf8_unchecked(bounds.next().unwrap()) }
+                    .parse()
+                    .unwrap(),
+                letter: words.next().unwrap()[0],
+                text: words.next().unwrap(),
+            }
         })
         .collect()
 }
 
 pub fn part_1(pwds: &[Password]) -> usize {
     pwds.iter()
-        .filter(|pwd| {
-            let ascii = pwd.text.bytes();
-            (pwd.a..=pwd.b).contains(&ascii.filter(|b| *b == pwd.letter as u8).count())
-        })
+        .filter(|pwd| (pwd.a..=pwd.b).contains(&bytecount::count(pwd.text, pwd.letter)))
         .count()
 }
 
 pub fn part_2(pwds: &[Password]) -> usize {
     pwds.iter()
         .filter(|pwd| {
-            let ascii = pwd.text.as_bytes();
-            (ascii[pwd.a - 1] == pwd.letter as u8) ^ (ascii[pwd.b - 1] == pwd.letter as u8)
+            (pwd.text[pwd.a - 1] == pwd.letter as u8) ^ (pwd.text[pwd.b - 1] == pwd.letter)
         })
         .count()
 }
@@ -40,19 +47,19 @@ pub fn part_2(pwds: &[Password]) -> usize {
 mod tests {
     use super::*;
 
-    use lazy_static::lazy_static;
-
-    lazy_static! {
-        static ref PASSWORDS: Vec<Password> = parse_input(include_str!("../inputs/day2.txt"));
-    }
-
     #[test]
     fn part_1_solution() {
-        assert_eq!(part_1(&PASSWORDS), 548);
+        assert_eq!(
+            part_1(&parse_input(include_bytes!("../inputs/day2.txt"))),
+            548
+        );
     }
 
     #[test]
     fn part_2_solution() {
-        assert_eq!(part_2(&PASSWORDS), 502);
+        assert_eq!(
+            part_2(&parse_input(include_bytes!("../inputs/day2.txt"))),
+            502
+        );
     }
 }
