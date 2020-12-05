@@ -48,5 +48,15 @@ pub fn day_4(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, day_1, day_2, day_3, day_4);
+pub fn day_5(c: &mut Criterion) {
+    c.bench_function("day_5", |b| {
+        b.iter(|| {
+            let input = day5::parse_input(include_str!("../inputs/day5.txt"));
+            day5::part_1(black_box(&input));
+            day5::part_2(black_box(input));
+        })
+    });
+}
+
+criterion_group!(benches, day_1, day_2, day_3, day_4, day_5);
 criterion_main!(benches);
