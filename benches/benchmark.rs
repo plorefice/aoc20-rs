@@ -1,7 +1,7 @@
 use aoc20_rs::*;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
-pub fn day1(c: &mut Criterion) {
+pub fn benchmark(c: &mut Criterion) {
     c.bench_function("day1", |b| {
         b.iter(|| {
             let input = day1::parse_input(include_str!("../inputs/day1.txt"));
@@ -9,9 +9,7 @@ pub fn day1(c: &mut Criterion) {
             day1::part_2(black_box(input));
         })
     });
-}
 
-pub fn day2(c: &mut Criterion) {
     c.bench_function("day2", |b| {
         b.iter(|| {
             let input = day2::parse_input(include_bytes!("../inputs/day2.txt"));
@@ -19,9 +17,7 @@ pub fn day2(c: &mut Criterion) {
             day2::part_2(black_box(&input));
         })
     });
-}
 
-pub fn day3(c: &mut Criterion) {
     c.bench_function("day3", |b| {
         b.iter(|| {
             let input = day3::parse_input(include_str!("../inputs/day3.txt"));
@@ -29,9 +25,7 @@ pub fn day3(c: &mut Criterion) {
             day3::part_2(black_box(&input));
         })
     });
-}
 
-pub fn day4(c: &mut Criterion) {
     c.bench_function("day4", |b| {
         b.iter(|| {
             let input = day4::parse_input(include_str!("../inputs/day4.txt"));
@@ -39,9 +33,7 @@ pub fn day4(c: &mut Criterion) {
             day4::part_2(black_box(&input));
         })
     });
-}
 
-pub fn day5(c: &mut Criterion) {
     c.bench_function("day5", |b| {
         b.iter(|| {
             let input = day5::parse_input(include_str!("../inputs/day5.txt"));
@@ -49,9 +41,7 @@ pub fn day5(c: &mut Criterion) {
             day5::part_2(black_box(input));
         })
     });
-}
 
-pub fn day6(c: &mut Criterion) {
     c.bench_function("day6", |b| {
         b.iter(|| {
             let input = include_bytes!("../inputs/day6.txt");
@@ -61,5 +51,5 @@ pub fn day6(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, day1, day2, day3, day4, day5, day6);
+criterion_group!(benches, benchmark);
 criterion_main!(benches);
