@@ -1,4 +1,4 @@
-use aoc20_rs::*;
+use aoc20::*;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 pub fn benchmark(c: &mut Criterion) {
