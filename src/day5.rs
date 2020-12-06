@@ -37,20 +37,13 @@ pub fn part_2(mut ids: Vec<usize>) -> usize {
     unreachable!()
 }
 
-#[cfg(test)]
-mod solutions {
-    use super::*;
-
-    #[test]
-    fn p1() {
-        assert_eq!(
-            part_1(&parse_input(include_str!("../inputs/day5.txt"))),
-            913
-        );
+crate::solutions!(
+    p1 => {
+        part_1(&parse_input(include_str!("../inputs/day5.txt"))),
+        913
+    },
+    p2 => {
+        part_2(parse_input(include_str!("../inputs/day5.txt"))),
+        717
     }
-
-    #[test]
-    fn p2() {
-        assert_eq!(part_2(parse_input(include_str!("../inputs/day5.txt"))), 717);
-    }
-}
+);

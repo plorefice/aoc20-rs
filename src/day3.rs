@@ -28,23 +28,13 @@ fn check_slope(map: &[Vec<bool>], dx: usize, dy: usize) -> usize {
     xs.zip(ys).filter(|(x, y)| map[*y][*x]).count()
 }
 
-#[cfg(test)]
-mod solutions {
-    use super::*;
-
-    #[test]
-    fn p1() {
-        assert_eq!(
-            part_1(&parse_input(include_str!("../inputs/day3.txt"))),
-            234
-        );
+crate::solutions!(
+    p1 => {
+        part_1(&parse_input(include_str!("../inputs/day3.txt"))),
+        234
+    },
+    p2 => {
+        part_2(&parse_input(include_str!("../inputs/day3.txt"))),
+        5813773056
     }
-
-    #[test]
-    fn p2() {
-        assert_eq!(
-            part_2(&parse_input(include_str!("../inputs/day3.txt"))),
-            5813773056
-        );
-    }
-}
+);

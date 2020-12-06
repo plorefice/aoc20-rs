@@ -86,23 +86,13 @@ pub fn part_2(input: &[Vec<(&[u8], &[u8])>]) -> usize {
         .count()
 }
 
-#[cfg(test)]
-mod solutions {
-    use super::*;
-
-    #[test]
-    fn p1() {
-        assert_eq!(
-            part_1(&parse_input(include_str!("../inputs/day4.txt"))),
-            247
-        );
+crate::solutions!(
+    p1 => {
+        part_1(&parse_input(include_str!("../inputs/day4.txt"))),
+        247
+    },
+    p2 => {
+        part_2(&parse_input(include_str!("../inputs/day4.txt"))),
+        145
     }
-
-    #[test]
-    fn p2() {
-        assert_eq!(
-            part_2(&parse_input(include_str!("../inputs/day4.txt"))),
-            145
-        );
-    }
-}
+);

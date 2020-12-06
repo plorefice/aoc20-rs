@@ -43,23 +43,13 @@ pub fn part_2(pwds: &[Password]) -> usize {
         .count()
 }
 
-#[cfg(test)]
-mod solutions {
-    use super::*;
-
-    #[test]
-    fn p1() {
-        assert_eq!(
-            part_1(&parse_input(include_bytes!("../inputs/day2.txt"))),
-            548
-        );
+crate::solutions!(
+    p1 => {
+        part_1(&parse_input(include_bytes!("../inputs/day2.txt"))),
+        548
+    },
+    p2 => {
+        part_2(&parse_input(include_bytes!("../inputs/day2.txt"))),
+        502
     }
-
-    #[test]
-    fn p2() {
-        assert_eq!(
-            part_2(&parse_input(include_bytes!("../inputs/day2.txt"))),
-            502
-        );
-    }
-}
+);

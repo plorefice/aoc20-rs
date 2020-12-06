@@ -45,23 +45,13 @@ pub fn part_2(mut input: Vec<usize>) -> usize {
     unreachable!("no answer found")
 }
 
-#[cfg(test)]
-mod solutions {
-    use super::*;
-
-    #[test]
-    fn p1() {
-        assert_eq!(
-            part_1(&parse_input(include_str!("../inputs/day1.txt"))),
-            1020084
-        );
+crate::solutions!(
+    p1 => {
+        part_1(&parse_input(include_str!("../inputs/day1.txt"))),
+        1020084
+    },
+    p2 => {
+        part_2(parse_input(include_str!("../inputs/day1.txt"))),
+        295086480
     }
-
-    #[test]
-    fn p2() {
-        assert_eq!(
-            part_2(parse_input(include_str!("../inputs/day1.txt"))),
-            295086480
-        );
-    }
-}
+);

@@ -47,31 +47,13 @@ pub fn part_2(input: &[u8]) -> u32 {
     total + group.count_ones()
 }
 
-// pub fn part_2<S: AsRef<str>>(input: S) -> usize {
-//     input
-//         .as_ref()
-//         .split("\n\n")
-//         .map(|lines| {
-//             lines
-//                 .split_ascii_whitespace()
-//                 .map(|line| line.bytes().fold(0usize, |ans, b| ans | (1 << (b - b'a'))))
-//                 .fold(std::usize::MAX, |all, ans| all & ans)
-//                 .count_ones()
-//         })
-//         .sum::<u32>() as usize
-// }
-
-#[cfg(test)]
-mod solutions {
-    use super::*;
-
-    #[test]
-    fn p1() {
-        assert_eq!(part_1(include_bytes!("../inputs/day6.txt")), 6457);
+crate::solutions!(
+    p1 => {
+        part_1(include_bytes!("../inputs/day6.txt")),
+        6457
+    },
+    p2 => {
+        part_2(include_bytes!("../inputs/day6.txt")),
+        3260
     }
-
-    #[test]
-    fn p2() {
-        assert_eq!(part_2(include_bytes!("../inputs/day6.txt")), 3260);
-    }
-}
+);
