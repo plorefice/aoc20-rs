@@ -44,11 +44,11 @@ pub fn part_2(pwds: &[Password]) -> usize {
 }
 
 #[cfg(test)]
-mod tests {
+mod solutions {
     use super::*;
 
     #[test]
-    fn part_1_solution() {
+    fn p1() {
         assert_eq!(
             part_1(&parse_input(include_bytes!("../inputs/day2.txt"))),
             548
@@ -56,7 +56,7 @@ mod tests {
     }
 
     #[test]
-    fn part_2_solution() {
+    fn p2() {
         assert_eq!(
             part_2(&parse_input(include_bytes!("../inputs/day2.txt"))),
             502

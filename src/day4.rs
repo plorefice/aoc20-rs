@@ -87,11 +87,11 @@ pub fn part_2(input: &[Vec<(&[u8], &[u8])>]) -> usize {
 }
 
 #[cfg(test)]
-mod tests {
+mod solutions {
     use super::*;
 
     #[test]
-    fn part_1_solution() {
+    fn p1() {
         assert_eq!(
             part_1(&parse_input(include_str!("../inputs/day4.txt"))),
             247
@@ -99,7 +99,7 @@ mod tests {
     }
 
     #[test]
-    fn part_2_solution() {
+    fn p2() {
         assert_eq!(
             part_2(&parse_input(include_str!("../inputs/day4.txt"))),
             145

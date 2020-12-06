@@ -62,16 +62,16 @@ pub fn part_2(input: &[u8]) -> u32 {
 // }
 
 #[cfg(test)]
-mod tests {
+mod solutions {
     use super::*;
 
     #[test]
-    fn part_1_solution() {
+    fn p1() {
         assert_eq!(part_1(include_bytes!("../inputs/day6.txt")), 6457);
     }
 
     #[test]
-    fn part_2_solution() {
+    fn p2() {
         assert_eq!(part_2(include_bytes!("../inputs/day6.txt")), 3260);
     }
 }
