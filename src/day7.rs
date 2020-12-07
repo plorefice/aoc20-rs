@@ -1,72 +1,121 @@
 use std::collections::HashMap;
 
-type Rules<'a> = HashMap<&'a str, Vec<(usize, &'a str)>>;
+pub struct Rules {
+    rules: Vec<Vec<(usize, usize)>>,
+    target: usize,
+}
 
-pub fn parse_input(input: &str) -> Rules {
-    let mut rules = HashMap::with_capacity(1024);
+impl Rules {
+    fn count_containers(&self) -> usize {
+        let mut cache = vec![false; self.rules.len()];
 
-    for line in input.lines() {
-        let mut halves = line.split(" contain ");
-
-        let outer = halves.next().unwrap().trim_end_matches(" bags");
-        let inners = halves.next().unwrap().trim_end_matches('.');
-
-        let inners = if inners == "no other bags" {
-            Vec::new()
-        } else {
-            inners
-                .split(", ")
-                .map(|inner| {
-                    let mut words = inner.splitn(2, ' ');
-                    let count = words.next().unwrap().parse::<usize>().unwrap();
-                    (
-                        count,
-                        words
-                            .next()
-                            .unwrap()
-                            .trim_end_matches(" bag")
-                            .trim_end_matches(" bags"),
-                    )
-                })
-                .collect::<Vec<_>>()
-        };
-
-        rules.insert(outer, inners);
+        (0..self.rules.len())
+            .filter(|&n| Self::contains(&self.rules, n, self.target, &mut cache))
+            .count()
     }
 
-    rules
+    fn count_bags(&self) -> usize {
+        self.inner_count(self.target)
+    }
+
+    fn inner_count(&self, bag: usize) -> usize {
+        self.rules[bag].iter().fold(0, |total, &(n, inner)| {
+            total + n + n * self.inner_count(inner)
+        })
+    }
+
+    fn contains(
+        rules: &[Vec<(usize, usize)>],
+        who: usize,
+        what: usize,
+        cache: &mut Vec<bool>,
+    ) -> bool {
+        if cache[who] {
+            return true;
+        }
+
+        for &(_, inner) in &rules[who] {
+            if inner == what || Self::contains(rules, inner, what, cache) {
+                cache[who] = true;
+                return true;
+            }
+        }
+
+        false
+    }
+}
+
+pub fn parse_input(input: &[u8]) -> Rules {
+    let mut rules = vec![Vec::with_capacity(16); 1024];
+    let mut mapping = HashMap::with_capacity(1024);
+    let mut next_id = 0;
+
+    for line in input.split(|b| *b == b'\n') {
+        let (target, rest) = skip_whitespaces(line, 2);
+
+        let target = *mapping.entry(target).or_insert_with(|| {
+            let id = next_id;
+            next_id += 1;
+            id
+        });
+
+        let (_, mut rest) = skip_whitespaces(rest, 2);
+
+        if &rest[..2] != b"no" {
+            while !rest.is_empty() {
+                let (n, r) = skip_whitespaces(rest, 1);
+                let (color, r) = skip_whitespaces(r, 2);
+                let (_, r) = skip_whitespaces(r, 1);
+
+                rules[target].push((
+                    (n[0] - b'0') as usize,
+                    *mapping.entry(color).or_insert_with(|| {
+                        let id = next_id;
+                        next_id += 1;
+                        id
+                    }),
+                ));
+
+                rest = r;
+            }
+        };
+    }
+
+    Rules {
+        rules,
+        target: mapping[&b"shiny gold"[..]],
+    }
+}
+
+fn skip_whitespaces(s: &[u8], n: usize) -> (&[u8], &[u8]) {
+    let mut seen = 0;
+
+    for (i, b) in s.iter().enumerate() {
+        if *b == b' ' {
+            seen += 1;
+            if seen == n {
+                return (&s[..i], &s[i + 1..]);
+            }
+        }
+    }
+    (s, b"")
 }
 
 pub fn part_1(rules: &Rules) -> usize {
-    rules
-        .iter()
-        .filter(|(k, _)| contains_shiny_gold(&rules, k))
-        .count()
+    rules.count_containers()
 }
 
 pub fn part_2(rules: &Rules) -> usize {
-    count_bags(&rules, "shiny gold")
-}
-
-fn contains_shiny_gold(rules: &HashMap<&str, Vec<(usize, &str)>>, bag: &str) -> bool {
-    rules[bag]
-        .iter()
-        .any(|(_, bag)| bag == &"shiny gold" || contains_shiny_gold(rules, bag))
-}
-
-fn count_bags(rules: &Rules, bag: &str) -> usize {
-    rules[bag]
-        .iter()
-        .fold(0, |total, (n, bag)| total + n + n * count_bags(rules, bag))
+    rules.count_bags()
 }
 
 crate::solutions! {
     p1 => {
-        part_1(&parse_input(include_str!("../inputs/day7.txt"))),
+        part_1(&parse_input(include_bytes!("../inputs/day7.txt"))),
         265
     },
     p2 => {
-        part_2(&parse_input(include_str!("../inputs/day7.txt"))),
+        part_2(&parse_input(include_bytes!("../inputs/day7.txt"))),
         14177
     }
 }

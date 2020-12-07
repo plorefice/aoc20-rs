@@ -52,7 +52,7 @@ pub fn benchmark(c: &mut Criterion) {
 
     c.bench_function("day7", |b| {
         b.iter(|| {
-            let input = day7::parse_input(include_str!("../inputs/day7.txt"));
+            let input = day7::parse_input(include_bytes!("../inputs/day7.txt"));
             day7::part_1(black_box(&input));
             day7::part_2(black_box(&input));
         })
