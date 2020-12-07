@@ -50,14 +50,17 @@ pub fn parse_input(input: &[u8]) -> Rules {
     let mut mapping = HashMap::with_capacity(1024);
     let mut next_id = 0;
 
+    let mut bump_id = || {
+        let id = next_id;
+        next_id += 1;
+        id
+    };
+
     for line in input.split(|b| *b == b'\n') {
         let (target, rest) = skip_whitespaces(line, 2);
 
-        let target = *mapping.entry(target).or_insert_with(|| {
-            let id = next_id;
-            next_id += 1;
-            id
-        });
+        #[allow(clippy::redundant_closure)]
+        let target = *mapping.entry(target).or_insert_with(|| bump_id());
 
         let (_, mut rest) = skip_whitespaces(rest, 2);
 
@@ -67,14 +70,10 @@ pub fn parse_input(input: &[u8]) -> Rules {
                 let (color, r) = skip_whitespaces(r, 2);
                 let (_, r) = skip_whitespaces(r, 1);
 
-                rules[target].push((
-                    (n[0] - b'0') as usize,
-                    *mapping.entry(color).or_insert_with(|| {
-                        let id = next_id;
-                        next_id += 1;
-                        id
-                    }),
-                ));
+                rules[target].push(((n[0] - b'0') as usize, {
+                    #[allow(clippy::redundant_closure)]
+                    *mapping.entry(color).or_insert_with(|| bump_id())
+                }));
 
                 rest = r;
             }
