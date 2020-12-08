@@ -1,3 +1,5 @@
+use std::str::FromStr;
+
 use aoc20::*;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -55,6 +57,14 @@ pub fn benchmark(c: &mut Criterion) {
             let input = day7::parse_input(include_bytes!("../inputs/day7.txt"));
             day7::part_1(black_box(&input));
             day7::part_2(black_box(&input));
+        })
+    });
+
+    c.bench_function("day8", |b| {
+        b.iter(|| {
+            let mut input = day8::Console::from_str(include_str!("../inputs/day8.txt")).unwrap();
+            day8::part_1(black_box(&mut input));
+            day8::part_2(black_box(&mut input));
         })
     });
 }
