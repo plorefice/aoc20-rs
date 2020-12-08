@@ -1,7 +1,9 @@
 use std::collections::HashMap;
 
+use smallvec::SmallVec;
+
 pub struct Rules {
-    rules: Vec<Vec<(usize, usize)>>,
+    rules: Vec<SmallVec<[(usize, usize); 16]>>,
     target: usize,
 }
 
@@ -25,7 +27,7 @@ impl Rules {
     }
 
     fn contains(
-        rules: &[Vec<(usize, usize)>],
+        rules: &[SmallVec<[(usize, usize); 16]>],
         who: usize,
         what: usize,
         cache: &mut Vec<bool>,
@@ -46,7 +48,7 @@ impl Rules {
 }
 
 pub fn parse_input(input: &[u8]) -> Rules {
-    let mut rules = vec![Vec::with_capacity(16); 1024];
+    let mut rules = vec![SmallVec::<[(usize, usize); 16]>::new(); 1024];
     let mut mapping = HashMap::with_capacity(1024);
     let mut next_id = 0;
 
