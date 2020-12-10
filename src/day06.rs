@@ -49,11 +49,11 @@ pub fn part_2(input: &[u8]) -> u32 {
 
 crate::solutions!(
     p1 => {
-        part_1(include_bytes!("../inputs/day6.txt")),
+        part_1(include_bytes!("../inputs/day06.txt")),
         6457
     },
     p2 => {
-        part_2(include_bytes!("../inputs/day6.txt")),
+        part_2(include_bytes!("../inputs/day06.txt")),
         3260
     }
 );

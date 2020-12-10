@@ -6,74 +6,74 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 pub fn benchmark(c: &mut Criterion) {
     c.bench_function("day1", |b| {
         b.iter(|| {
-            let input = day1::parse_input(include_str!("../inputs/day1.txt"));
-            day1::part_1(black_box(&input));
-            day1::part_2(black_box(input));
+            let input = day01::parse_input(include_str!("../inputs/day01.txt"));
+            day01::part_1(black_box(&input));
+            day01::part_2(black_box(input));
         })
     });
 
     c.bench_function("day2", |b| {
         b.iter(|| {
-            let input = day2::parse_input(include_bytes!("../inputs/day2.txt"));
-            day2::part_1(black_box(&input));
-            day2::part_2(black_box(&input));
+            let input = day02::parse_input(include_bytes!("../inputs/day02.txt"));
+            day02::part_1(black_box(&input));
+            day02::part_2(black_box(&input));
         })
     });
 
     c.bench_function("day3", |b| {
         b.iter(|| {
-            let input = day3::parse_input(include_str!("../inputs/day3.txt"));
-            day3::part_1(black_box(&input));
-            day3::part_2(black_box(&input));
+            let input = day03::parse_input(include_str!("../inputs/day03.txt"));
+            day03::part_1(black_box(&input));
+            day03::part_2(black_box(&input));
         })
     });
 
     c.bench_function("day4", |b| {
         b.iter(|| {
-            let input = day4::parse_input(include_str!("../inputs/day4.txt"));
-            day4::part_1(black_box(&input));
-            day4::part_2(black_box(&input));
+            let input = day04::parse_input(include_str!("../inputs/day04.txt"));
+            day04::part_1(black_box(&input));
+            day04::part_2(black_box(&input));
         })
     });
 
     c.bench_function("day5", |b| {
         b.iter(|| {
-            let input = day5::parse_input(include_str!("../inputs/day5.txt"));
-            day5::part_1(black_box(&input));
-            day5::part_2(black_box(input));
+            let input = day05::parse_input(include_str!("../inputs/day05.txt"));
+            day05::part_1(black_box(&input));
+            day05::part_2(black_box(input));
         })
     });
 
     c.bench_function("day6", |b| {
         b.iter(|| {
-            let input = include_bytes!("../inputs/day6.txt");
-            day6::part_1(black_box(input));
-            day6::part_2(black_box(input));
+            let input = include_bytes!("../inputs/day06.txt");
+            day06::part_1(black_box(input));
+            day06::part_2(black_box(input));
         })
     });
 
     c.bench_function("day7", |b| {
         b.iter(|| {
-            let input = day7::parse_input(include_bytes!("../inputs/day7.txt"));
-            day7::part_1(black_box(&input));
-            day7::part_2(black_box(&input));
+            let input = day07::parse_input(include_bytes!("../inputs/day07.txt"));
+            day07::part_1(black_box(&input));
+            day07::part_2(black_box(&input));
         })
     });
 
     c.bench_function("day8", |b| {
         b.iter(|| {
-            let mut input = day8::Console::from_str(include_str!("../inputs/day8.txt")).unwrap();
-            day8::part_1(black_box(&mut input));
-            day8::part_2(black_box(&mut input));
+            let mut input = day08::Console::from_str(include_str!("../inputs/day08.txt")).unwrap();
+            day08::part_1(black_box(&mut input));
+            day08::part_2(black_box(&mut input));
         })
     });
 
     c.bench_function("day9", |b| {
         b.iter(|| {
-            let input = day9::parse_input(include_str!("../inputs/day9.txt"));
-            day9::part_2(
+            let input = day09::parse_input(include_str!("../inputs/day09.txt"));
+            day09::part_2(
                 black_box(&input),
-                black_box(day9::part_1(black_box(&input))),
+                black_box(day09::part_1(black_box(&input))),
             );
         })
     });

@@ -47,11 +47,11 @@ pub fn part_2(mut input: Vec<usize>) -> usize {
 
 crate::solutions!(
     p1 => {
-        part_1(&parse_input(include_str!("../inputs/day1.txt"))),
+        part_1(&parse_input(include_str!("../inputs/day01.txt"))),
         1020084
     },
     p2 => {
-        part_2(parse_input(include_str!("../inputs/day1.txt"))),
+        part_2(parse_input(include_str!("../inputs/day01.txt"))),
         295086480
     }
 );

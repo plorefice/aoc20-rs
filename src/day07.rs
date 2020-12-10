@@ -112,11 +112,11 @@ pub fn part_2(rules: &Rules) -> usize {
 
 crate::solutions! {
     p1 => {
-        part_1(&parse_input(include_bytes!("../inputs/day7.txt"))),
+        part_1(&parse_input(include_bytes!("../inputs/day07.txt"))),
         265
     },
     p2 => {
-        part_2(&parse_input(include_bytes!("../inputs/day7.txt"))),
+        part_2(&parse_input(include_bytes!("../inputs/day07.txt"))),
         14177
     }
 }

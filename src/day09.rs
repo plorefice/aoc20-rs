@@ -52,11 +52,11 @@ pub fn part_2(data: &[u64], target: u64) -> u64 {
 
 crate::solutions! {
     p1 => {
-        part_1(&parse_input(include_str!("../inputs/day9.txt"))),
+        part_1(&parse_input(include_str!("../inputs/day09.txt"))),
         88311122
     },
     p2 => {
-        part_2(&parse_input(include_str!("../inputs/day9.txt")), 88311122),
+        part_2(&parse_input(include_str!("../inputs/day09.txt")), 88311122),
         13549369
     }
 }

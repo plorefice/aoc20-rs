@@ -88,11 +88,11 @@ pub fn part_2(input: &[Vec<(&[u8], &[u8])>]) -> usize {
 
 crate::solutions!(
     p1 => {
-        part_1(&parse_input(include_str!("../inputs/day4.txt"))),
+        part_1(&parse_input(include_str!("../inputs/day04.txt"))),
         247
     },
     p2 => {
-        part_2(&parse_input(include_str!("../inputs/day4.txt"))),
+        part_2(&parse_input(include_str!("../inputs/day04.txt"))),
         145
     }
 );

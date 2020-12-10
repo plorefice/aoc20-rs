@@ -109,11 +109,11 @@ pub fn part_2(console: &mut Console) -> isize {
 
 crate::solutions! {
     p1 => {
-        part_1(&mut Console::from_str(include_str!("../inputs/day8.txt")).unwrap()),
+        part_1(&mut Console::from_str(include_str!("../inputs/day08.txt")).unwrap()),
         1446
     },
     p2 => {
-        part_2(&mut Console::from_str(include_str!("../inputs/day8.txt")).unwrap()),
+        part_2(&mut Console::from_str(include_str!("../inputs/day08.txt")).unwrap()),
         1403
     }
 }

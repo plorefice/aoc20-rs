@@ -45,11 +45,11 @@ pub fn part_2(pwds: &[Password]) -> usize {
 
 crate::solutions!(
     p1 => {
-        part_1(&parse_input(include_bytes!("../inputs/day2.txt"))),
+        part_1(&parse_input(include_bytes!("../inputs/day02.txt"))),
         548
     },
     p2 => {
-        part_2(&parse_input(include_bytes!("../inputs/day2.txt"))),
+        part_2(&parse_input(include_bytes!("../inputs/day02.txt"))),
         502
     }
 );

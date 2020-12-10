@@ -30,11 +30,11 @@ fn check_slope(map: &[Vec<bool>], dx: usize, dy: usize) -> usize {
 
 crate::solutions!(
     p1 => {
-        part_1(&parse_input(include_str!("../inputs/day3.txt"))),
+        part_1(&parse_input(include_str!("../inputs/day03.txt"))),
         234
     },
     p2 => {
-        part_2(&parse_input(include_str!("../inputs/day3.txt"))),
+        part_2(&parse_input(include_str!("../inputs/day03.txt"))),
         5813773056
     }
 );

@@ -39,11 +39,11 @@ pub fn part_2(mut ids: Vec<usize>) -> usize {
 
 crate::solutions!(
     p1 => {
-        part_1(&parse_input(include_str!("../inputs/day5.txt"))),
+        part_1(&parse_input(include_str!("../inputs/day05.txt"))),
         913
     },
     p2 => {
-        part_2(parse_input(include_str!("../inputs/day5.txt"))),
+        part_2(parse_input(include_str!("../inputs/day05.txt"))),
         717
     }
 );
