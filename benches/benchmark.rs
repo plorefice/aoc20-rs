@@ -85,6 +85,14 @@ pub fn benchmark(c: &mut Criterion) {
             day10::part_2(black_box(&input));
         })
     });
+
+    c.bench_function("day11", |b| {
+        b.iter(|| {
+            let input = day11::parse_input(include_str!("../inputs/day11.txt"));
+            day11::part_1(black_box(input.clone()));
+            day11::part_2(black_box(input));
+        })
+    });
 }
 
 criterion_group!(benches, benchmark);
