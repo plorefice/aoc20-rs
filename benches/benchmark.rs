@@ -144,8 +144,14 @@ pub fn benchmark(c: &mut Criterion) {
 
     c.bench_function("day18", |b| {
         b.iter(|| {
-            let input = day18::parse_input(include_str!("../inputs/day18.txt"));
-            day18::part_1(black_box(input));
+            day18::solve(day18::parse_input(
+                black_box(include_bytes!("../inputs/day18.txt")),
+                false,
+            ));
+            day18::solve(day18::parse_input(
+                black_box(include_bytes!("../inputs/day18.txt")),
+                true,
+            ));
         })
     });
 }
