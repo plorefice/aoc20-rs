@@ -154,6 +154,14 @@ pub fn benchmark(c: &mut Criterion) {
             ));
         })
     });
+
+    c.bench_function("day19", |b| {
+        b.iter(|| {
+            let mut input = day19::parse_input(include_str!("../inputs/day19.txt"));
+            day19::part_1(black_box(&input));
+            day19::part_2(black_box(&mut input));
+        })
+    });
 }
 
 criterion_group!(benches, benchmark);
