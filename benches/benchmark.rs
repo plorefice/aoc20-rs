@@ -171,6 +171,14 @@ pub fn benchmark(c: &mut Criterion) {
             day21::part_2(black_box(solved));
         })
     });
+
+    c.bench_function("day22", |b| {
+        b.iter(|| {
+            let input = day22::parse_input(include_str!("../inputs/day22.txt"));
+            day22::part_1(black_box(input.clone()));
+            day22::part_2(black_box(input));
+        })
+    });
 }
 
 criterion_group!(benches, benchmark);
