@@ -1,4 +1,7 @@
-use std::collections::{HashSet, VecDeque};
+use std::{
+    collections::{hash_map::DefaultHasher, HashSet, VecDeque},
+    hash::{Hash, Hasher},
+};
 
 use itertools::Itertools;
 
@@ -28,10 +31,17 @@ pub fn part_2(input: (VecDeque<u64>, VecDeque<u64>)) -> u64 {
 
 fn play_game(input: (VecDeque<u64>, VecDeque<u64>), rec: bool) -> (bool, u64) {
     let (mut d1, mut d2) = input;
-    let mut seen = HashSet::with_capacity(512);
+    let mut seen = HashSet::with_capacity(2048);
+
+    let hash_fn = |d1: &VecDeque<u64>, d2: &VecDeque<u64>| -> u64 {
+        let mut hasher = DefaultHasher::new();
+        d1.hash(&mut hasher);
+        d2.hash(&mut hasher);
+        hasher.finish()
+    };
 
     while !d1.is_empty() && !d2.is_empty() {
-        if rec && !seen.insert((d1.clone(), d2.clone())) {
+        if rec && !seen.insert(hash_fn(&d1, &d2)) {
             return (true, score(d1));
         }
 
