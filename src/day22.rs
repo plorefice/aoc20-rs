@@ -33,12 +33,20 @@ fn play_game(input: (VecDeque<u64>, VecDeque<u64>), rec: bool) -> (bool, u64) {
     let (mut d1, mut d2) = input;
     let mut seen = HashSet::with_capacity(2048);
 
+    // Store the hash of the state rather than the state itself for a major speedup
     let hash_fn = |d1: &VecDeque<u64>, d2: &VecDeque<u64>| -> u64 {
         let mut hasher = DefaultHasher::new();
         d1.hash(&mut hasher);
         d2.hash(&mut hasher);
         hasher.finish()
     };
+
+    // If in a game P1 has the highest card and its value is higher than the total number of cards
+    // in the game, P1 wins automatically.
+    let highest = *d1.iter().max().unwrap();
+    if highest > (d1.len() + d2.len()) as u64 && highest > *d2.iter().max().unwrap() {
+        return (true, 0);
+    }
 
     while !d1.is_empty() && !d2.is_empty() {
         if rec && !seen.insert(hash_fn(&d1, &d2)) {
