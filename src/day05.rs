@@ -8,12 +8,12 @@ pub fn parse_input<S: AsRef<str>>(input: S) -> Vec<usize> {
             let row = w
                 .bytes()
                 .take(7)
-                .fold(0, |n, c| (n << 1) + if c == b'B' { 1 } else { 0 });
+                .fold(0, |n, c| (n << 1) + usize::from(c == b'B'));
 
             let seat = w
                 .bytes()
                 .skip(7)
-                .fold(0, |n, c| (n << 1) + if c == b'R' { 1 } else { 0 });
+                .fold(0, |n, c| (n << 1) + usize::from(c == b'R'));
 
             row * 8 + seat
         })

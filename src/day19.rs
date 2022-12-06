@@ -66,12 +66,12 @@ pub fn solve((rules, inputs): &(HashMap<u16, Rule>, Vec<&[u8]>), p2: bool) -> us
             // I assume rule #0 is [8 11] for every input, since the problem text hints at that.
             // In part 2, keep applying rule 8 until we either hit a match or run out of input.
             while !s.is_empty() {
-                let (valid, rest) = validate(s, &rules, 8);
+                let (valid, rest) = validate(s, rules, 8);
                 if !valid {
                     break;
                 }
 
-                let (valid, last) = validate(rest, &rules, 11);
+                let (valid, last) = validate(rest, rules, 11);
                 if valid && last.is_empty() {
                     return true;
                 } else if p2 {

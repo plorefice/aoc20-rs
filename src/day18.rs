@@ -41,7 +41,7 @@ pub fn parse_input<S: AsRef<[u8]>>(input: S, p2: bool) -> Vec<VecDeque<u8>> {
 }
 
 pub fn solve(mut exprs: Vec<VecDeque<u8>>) -> u64 {
-    exprs.iter_mut().map(|expr| evaluate(expr)).sum()
+    exprs.iter_mut().map(evaluate).sum()
 }
 
 fn evaluate(expr: &mut VecDeque<u8>) -> u64 {

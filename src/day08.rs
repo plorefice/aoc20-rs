@@ -1,6 +1,6 @@
 use std::str::FromStr;
 
-#[derive(Debug, Copy, Clone, PartialEq)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum Opcode {
     Acc(isize),
     Jmp(isize),

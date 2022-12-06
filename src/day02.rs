@@ -8,7 +8,7 @@ pub struct Password<'a> {
     text: &'a [u8],
 }
 
-pub fn parse_input<'a>(input: &'a [u8]) -> Vec<Password<'a>> {
+pub fn parse_input(input: &[u8]) -> Vec<Password<'_>> {
     input
         .split(|b| *b == b'\n')
         .map(|l| {
